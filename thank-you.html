@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Momina Sheikh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #faf8f5;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .thank-you-container {
+            max-width: 600px;
+            background: white;
+            padding: 60px 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+            border: 1px solid #e8e2da;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .thank-you-container .icon {
+            font-size: 4rem;
+            color: #feb42f;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .thank-you-container h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .thank-you-container h1 span {
+            color: #cf8000;
+        }
+
+        .thank-you-container p {
+            color: #6b6b6b;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .thank-you-container .response-time {
+            color: #6b6b6b;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            padding: 12px 20px;
+            background: #fefcf8;
+            border-radius: 12px;
+            border: 1px solid #e8e2da;
+            display: inline-block;
+        }
+
+        .thank-you-container .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 14px 38px;
+            background: #feb42f;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 30px rgba(254, 180, 47, 0.35);
+        }
+
+        .thank-you-container .btn-home:hover {
+            background: #cf8000;
+            color: white;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 16px 45px rgba(207, 128, 0, 0.45);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 480px) {
+            .thank-you-container {
+                padding: 40px 25px;
+            }
+            .thank-you-container h1 {
+                font-size: 2rem;
+            }
+            .thank-you-container .icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h1><span>Thank You</span></h1>
+        <p>Your message has been sent successfully!</p>
+        <p>I appreciate you reaching out and will get back to you within 24 hours.</p>
+        <div class="response-time">
+            <i class="fas fa-clock" style="color: #feb42f;"></i> 
+            Response time: 24 hours
+        </div>
+        <br>
+        <a href="/" class="btn-home">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+    </div>
+</body>
+</html>
