@@ -4,7 +4,7 @@
 
 ## 📸 Live Demo
 
-🔗 **Live Website:** [https://mominasheikhportfolio.netlify.app]
+🔗 **Live Website:** [https://mominashiekhportfolio.netlify.app]
 
 ---
 
