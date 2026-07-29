@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Work - Momina Sheikh</title>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('ms-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--body-bg);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+            position: relative;
+        }
+
+        :root {
+            --primary: #feb42f;
+            --accent: #ffc857;
+            --on-primary: #14110d;
+            --dark: #f5f0e6;
+            --light: #16130f;
+            --card-bg: #1c1815;
+            --gray: #a89f92;
+            --border: #332d24;
+            --body-bg: #0d0b09;
+            --blob-1: rgba(254, 180, 47, 0.20);
+            --blob-2: rgba(255, 111, 60, 0.14);
+            --blob-3: rgba(120, 80, 255, 0.10);
+            --shadow-hover: 0 20px 60px rgba(254, 180, 47, 0.25);
+        }
+
+        html[data-theme="light"] {
+            --primary: #feb42f;
+            --accent: #cf8000;
+            --on-primary: #1a1a1a;
+            --dark: #1a1a1a;
+            --light: #fefcf8;
+            --card-bg: #ffffff;
+            --gray: #6b6b6b;
+            --border: #e8e2da;
+            --body-bg: #faf8f5;
+            --blob-1: rgba(254, 180, 47, 0.16);
+            --blob-2: rgba(255, 111, 60, 0.10);
+            --blob-3: rgba(120, 80, 255, 0.08);
+            --shadow-hover: 0 20px 60px rgba(254, 180, 47, 0.15);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: var(--card-bg);
+            padding: 18px 0;
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s;
+        }
+
+        .top-bar.scrolled {
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            padding: 12px 0;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: none;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: logoFloat 3.5s ease-in-out infinite;
+            filter: drop-shadow(0 2px 10px rgba(254, 180, 47, 0.35));
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-3px) rotate(3deg); }
+        }
+
+        .logo img:hover {
+            transform: scale(1.15) rotate(-8deg);
+            filter: drop-shadow(0 4px 18px rgba(254, 180, 47, 0.55));
+            animation-play-state: paused;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05) rotate(-5deg);
+            box-shadow: 0 0 20px rgba(254, 180, 47, 0.3);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--dark);
+        }
+
+        .nav-links .btn-nav {
+            background: var(--primary);
+            color: var(--on-primary);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links .btn-nav::after {
+            display: none;
+        }
+
+        .nav-links .btn-nav:hover {
+            background: var(--accent);
+            color: var(--on-primary);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(207, 128, 0, 0.35);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: transform 0.3s;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+
+        /* ===== THEME TOGGLE ===== */
+        .theme-toggle {
+            position: relative;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 18px;
+            flex-shrink: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            transform: rotate(15deg) scale(1.08);
+            box-shadow: 0 8px 20px rgba(254, 180, 47, 0.25);
+        }
+
+        .theme-toggle i {
+            position: absolute;
+            font-size: 1.15rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .theme-toggle .sun-icon {
+            color: var(--primary);
+            opacity: 0;
+            transform: translateY(20px) rotate(90deg);
+        }
+
+        .theme-toggle .moon-icon {
+            color: var(--primary);
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+        }
+
+        html[data-theme="light"] .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+        }
+
+        html[data-theme="light"] .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: translateY(-20px) rotate(-90deg);
+        }
+
+        /* ===== 3D ANIMATED BACKGROUND ===== */
+        .bg-scene {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+            perspective: 1000px;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.9;
+            will-change: transform;
+        }
+
+        .blob-1 {
+            width: 480px;
+            height: 480px;
+            top: -10%;
+            left: -10%;
+            background: radial-gradient(circle, var(--blob-1), transparent 70%);
+            animation: floatBlob1 18s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            top: 30%;
+            right: -12%;
+            background: radial-gradient(circle, var(--blob-2), transparent 70%);
+            animation: floatBlob2 22s ease-in-out infinite;
+        }
+
+        .blob-3 {
+            width: 360px;
+            height: 360px;
+            bottom: 5%;
+            left: 8%;
+            background: radial-gradient(circle, var(--blob-3), transparent 70%);
+            animation: floatBlob3 26s ease-in-out infinite;
+        }
+
+        .blob-4 {
+            width: 300px;
+            height: 300px;
+            bottom: 30%;
+            right: 20%;
+            background: radial-gradient(circle, var(--blob-1), transparent 70%);
+            animation: floatBlob2 20s ease-in-out infinite reverse;
+        }
+
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.15;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+        }
+
+        @keyframes floatBlob1 {
+            0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+            33% { transform: translate3d(60px, 80px, 0) rotate(15deg) scale(1.15); }
+            66% { transform: translate3d(-40px, 40px, 0) rotate(-10deg) scale(0.9); }
+        }
+
+        @keyframes floatBlob2 {
+            0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate3d(-70px, -50px, 0) rotate(-20deg) scale(1.2); }
+        }
+
+        @keyframes floatBlob3 {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(50px, -60px, 0) scale(1.1); }
+        }
+
+        header, section, footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            padding: 50px 0 30px;
+            background: var(--light);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .page-header h1 span {
+            color: var(--accent);
+        }
+
+        .page-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+
+        /* ===== PORTFOLIO ===== */
+        .portfolio {
+            padding: 40px 0 70px;
+            background: var(--light);
+        }
+
+        .portfolio-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .filters-scroll-wrap {
+            position: relative;
+        }
+
+        .scroll-hint {
+            display: none;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            color: var(--gray);
+            border: 1px solid var(--border);
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--on-primary);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(254, 180, 47, 0.25);
+        }
+
+        .portfolio-category {
+            transition: opacity 0.3s;
+        }
+
+        .portfolio-category.hidden {
+            display: none;
+        }
+
+        .category-heading {
+            margin: 50px 0 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .category-heading h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+        }
+
+        .category-heading h3 span {
+            color: var(--accent);
+        }
+
+        .category-heading .sub-title {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .image-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .image-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+
+        .image-card:hover {
+            transform: translateY(-8px) scale(1.02) rotate(-0.5deg);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .image-card:active {
+            transform: translateY(-4px) scale(0.98);
+        }
+
+        .image-card .card-img {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            background: #211d18;
+        }
+
+        .image-card .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s;
+            display: block;
+            background: var(--card-bg);
+        }
+
+        .image-card:hover .card-img img {
+            transform: scale(1.03);
+        }
+
+        .image-card .card-img .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .image-card:hover .card-img .overlay {
+            opacity: 1;
+        }
+
+        .image-card .card-img .overlay i {
+            color: white;
+            font-size: 2rem;
+            background: rgba(255,255,255,0.2);
+            padding: 16px 18px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .image-card:hover .card-img .overlay i {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: var(--on-primary);
+        }
+
+        .linkedin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .linkedin-grid .image-card {
+            aspect-ratio: 16/7;
+            border-left: 4px solid var(--primary);
+        }
+
+        .linkedin-grid .image-card .card-img img {
+            object-fit: contain;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lightbox .lightbox-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            position: relative;
+            animation: scaleIn 0.3s ease;
+            background: var(--card-bg);
+        }
+
+        .lightbox .lightbox-content img {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox .close-btn {
+            position: absolute;
+            top: -55px;
+            right: -10px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox .close-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--on-primary);
+            box-shadow: 0 0 30px rgba(254, 180, 47, 0.4);
+        }
+
+        .lightbox .close-btn i {
+            font-size: 1.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* ===== BACK BUTTON ===== */
+        .back-wrapper {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .btn-back:hover {
+            background: var(--primary);
+            color: var(--on-primary);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(254, 180, 47, 0.3);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 20px 0;
+                gap: 15px;
+                background: var(--card-bg);
+                border-top: 1px solid var(--border);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .filters-scroll-wrap {
+                margin: 0 -20px 25px;
+            }
+            .filters-scroll-wrap::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 14px;
+                width: 44px;
+                background: linear-gradient(90deg, transparent, var(--body-bg));
+                pointer-events: none;
+                transition: opacity 0.3s;
+            }
+            .filters-scroll-wrap.scrolled-end::after {
+                opacity: 0;
+            }
+            .scroll-hint {
+                display: flex;
+                position: absolute;
+                top: 0;
+                bottom: 14px;
+                right: 4px;
+                width: 26px;
+                align-items: center;
+                justify-content: center;
+                color: var(--primary);
+                font-size: 0.85rem;
+                pointer-events: none;
+                animation: scrollHintPulse 1.4s ease-in-out infinite;
+                z-index: 2;
+                transition: opacity 0.3s;
+            }
+            .filters-scroll-wrap.scrolled-end .scroll-hint {
+                opacity: 0;
+            }
+            @keyframes scrollHintPulse {
+                0%, 100% { transform: translateX(0); opacity: 0.6; }
+                50% { transform: translateX(5px); opacity: 1; }
+            }
+            .portfolio-filters {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                overflow-x: auto;
+                scroll-snap-type: x proximity;
+                padding: 4px 20px 14px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                scrollbar-color: var(--primary) transparent;
+            }
+            .portfolio-filters::-webkit-scrollbar {
+                height: 5px;
+            }
+            .portfolio-filters::-webkit-scrollbar-track {
+                background: var(--border);
+                border-radius: 10px;
+            }
+            .portfolio-filters::-webkit-scrollbar-thumb {
+                background: var(--primary);
+                border-radius: 10px;
+            }
+            .filter-btn {
+                scroll-snap-align: start;
+                flex-shrink: 0;
+            }
+            .theme-toggle {
+                margin-left: 12px;
+                width: 40px;
+                height: 40px;
+            }
+            .hamburger {
+                display: block;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .image-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .linkedin-grid {
+                grid-template-columns: 1fr;
+            }
+            .lightbox {
+                padding: 20px;
+            }
+            .lightbox .close-btn {
+                top: -45px;
+                right: 0;
+                width: 42px;
+                height: 42px;
+                font-size: 1.5rem;
+            }
+            .lightbox .close-btn i {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .image-cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .lightbox {
+                padding: 15px;
+            }
+            .lightbox .close-btn {
+                top: -40px;
+                right: 0;
+                width: 38px;
+                height: 38px;
+                font-size: 1.2rem;
+            }
+            .lightbox .close-btn i {
+                font-size: 1rem;
+            }
+            .logo img {
+                width: 35px;
+                height: 35px;
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ANIMATED 3D BACKGROUND ===== -->
+    <div class="bg-scene" aria-hidden="true">
+        <span class="blob blob-1"></span>
+        <span class="blob blob-2"></span>
+        <span class="blob blob-3"></span>
+        <span class="blob blob-4"></span>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="top-bar" id="header">
+        <div class="container">
+            <a href="/" class="logo">
+                <img src="logo.png" alt="Momina Sheikh logo">
+                Momina<span>Sheikh.</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#portfolio" class="active">Work</a></li>
+                <li><a href="/#process">Process</a></li>
+                <li><a href="/#testimonials">Testimonials</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#benefits">Benefits</a></li>
+                <li><a href="/#contact" class="btn-nav">Contact Me</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" title="Switch theme" aria-label="Toggle light and dark theme">
+                <i class="fas fa-sun sun-icon"></i>
+                <i class="fas fa-moon moon-icon"></i>
+            </button>
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>All <span>Work</span></h1>
+            <p>A complete collection of brand-building, social media management, and personal branding work.</p>
+        </div>
+    </section>
+
+    <!-- ===== PORTFOLIO ===== -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+
+            <div class="filters-scroll-wrap" id="filtersScrollWrap">
+                <div class="portfolio-filters" id="portfolioFilters">
+                    <button class="filter-btn active" data-filter="all">All Work</button>
+                    <button class="filter-btn" data-filter="social-media">Social Media</button>
+                    <button class="filter-btn" data-filter="growth">Growth</button>
+                    <button class="filter-btn" data-filter="brand-identity">Brand Identity</button>
+                    <button class="filter-btn" data-filter="linkedin-banners">LinkedIn Banners</button>
+                    <button class="filter-btn" data-filter="profile-optimization">Profile Optimization</button>
+                    <button class="filter-btn" data-filter="visibility-authority">Visibility & Authority</button>
+                    <button class="filter-btn" data-filter="content-creation">Content Creation</button>
+                </div>
+                <span class="scroll-hint" id="scrollHint"><i class="fas fa-chevron-right"></i></span>
+            </div>
+
+            <div class="portfolio-category" data-category="social-media">
+            <!-- 1. Social Media Management -->
+            <div class="category-heading">
+                <h3>Social Media Management <span>· Instagram Handling</span></h3>
+                <div class="sub-title">I managed digital presence through platform-focused strategies designed to build consistency, audience engagement, and long-term brand growth.</div>
+            </div>
+            <div class="image-cards-grid">
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Social Media Management/1.jpeg" alt="Social Post 1">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Social Media Management/2.jpeg" alt="Social Post 2">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Social Media Management/3.jpeg" alt="Social Post 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="portfolio-category" data-category="growth">
+            <!-- 2. Organic Growth Performance -->
+            <div class="category-heading">
+                <h3>Organic Growth Performance <span>· Instagram Analytics</span></h3>
+                <div class="sub-title">I drive sustainable organic growth through audience-focused strategies built to maximize reach, engagement, and community connection.</div>
+            </div>
+            <div class="image-cards-grid">
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Organic Growth Performance/1.jpeg" alt="Growth 1">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Organic Growth Performance/2.jpeg" alt="Growth 2">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Organic Growth Performance/3.jpeg" alt="Growth 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="portfolio-category" data-category="brand-identity">
+            <!-- 3. Visual Brand Identity -->
+            <div class="category-heading">
+                <h3>Visual Brand Identity <span>· Aesthetic Instagram Feed</span></h3>
+                <div class="sub-title">I designed visually cohesive brand experiences that maintain consistency, strengthen recognition, and elevate overall digital presence.</div>
+            </div>
+            <div class="image-cards-grid">
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visual Brand Identity/1.jpeg" alt="Brand Identity 1">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visual Brand Identity/2.jpeg" alt="Brand Identity 2">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visual Brand Identity/3.jpeg" alt="Brand Identity 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="portfolio-category" data-category="linkedin-banners">
+            <!-- 4. Creative LinkedIn Banners -->
+            <div class="category-heading">
+                <h3>Creative LinkedIn Banners <span>· Professional Visuals</span></h3>
+                <div class="sub-title">Strategy · Excellence · Performance · Branding · Content Design</div>
+            </div>
+            <div class="linkedin-grid">
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/linkedin banners/1.jpeg" alt="LinkedIn Banner 1">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/linkedin banners/2.jpeg" alt="LinkedIn Banner 2">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/linkedin banners/3.jpeg" alt="LinkedIn Banner 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/linkedin banners/4.jpeg" alt="LinkedIn Banner 4">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/linkedin banners/5.jpeg" alt="LinkedIn Banner 5">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/linkedin banners/6.jpeg" alt="LinkedIn Banner 6">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/linkedin banners/7.jpeg" alt="LinkedIn Banner 7">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/linkedin banners/8.jpeg" alt="LinkedIn Banner 8">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="portfolio-category" data-category="profile-optimization">
+            <!-- 5. Profile Optimization Project -->
+            <div class="category-heading">
+                <h3>Profile Optimization Project <span>· Before & After</span></h3>
+                <div class="sub-title">I Transform professional profiles into high-converting digital assets designed to strengthen credibility and attract aligned opportunities.</div>
+            </div>
+            <div class="image-cards-grid">
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Profile Optimization Project/1.jpeg" alt="Profile 1">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Profile Optimization Project/2.jpeg" alt="Profile 2">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Profile Optimization Project/3.jpeg" alt="Profile 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Profile Optimization Project/4.jpeg" alt="Profile 4">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Profile Optimization Project/5.jpeg" alt="Profile 5">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Profile Optimization Project/6.jpeg" alt="Profile 6">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="portfolio-category" data-category="visibility-authority">
+            <!-- 6. Visibility & Authority Results -->
+            <div class="category-heading">
+                <h3>Visibility & Authority Results <span>· Profile Engagement</span></h3>
+                <div class="sub-title">I Helped brands and professionals increase visibility organically while turning their linkedin presence into stronger authority and meaningful opportunities.</div>
+            </div>
+            <div class="image-cards-grid">
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/1.jpeg" alt="Results 1">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/2.jpeg" alt="Results 2">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/3.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/4.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/5.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/6.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/7.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/8.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/9.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/10.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/11.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/12.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div><div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Visibility & Authority Results/13.jpeg" alt="Results 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="portfolio-category" data-category="content-creation">
+            <!-- 7. Creative Content Creation -->
+            <div class="category-heading">
+                <h3>Creative Content Creation <span>· Profile Engagement</span></h3>
+                <div class="sub-title">Creative Content Creation . High Performing Posts-Carousel Designs</div>
+            </div>
+            <div class="image-cards-grid">
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/1.jpeg" alt="Content 1">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/2.jpeg" alt="Content 2">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/3.jpeg" alt="Content 3">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/4.jpeg" alt="Content 4">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/5.jpeg" alt="Content 5">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/6.jpeg" alt="Content 6">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/7.jpeg" alt="Content 7">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/8.jpeg" alt="Content 8">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/9.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/10.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/11.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/12.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/13.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/14.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/15.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/16.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/17.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/18.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this.querySelector('.card-img img'))">
+                    <div class="card-img">
+                        <img src="/Creative Content Creation/19.jpeg" alt="Content 9">
+                        <div class="overlay"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <!-- ===== BACK BUTTON ===== -->
+            <div class="back-wrapper">
+                <a href="/" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+            <img src="" alt="Portfolio Image" id="lightboxImg">
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer style="background:#100e0b; color:#f5f0e6; padding:30px 0 20px; border-top:2px solid #332d24; text-align:center;">
+        <div class="container">
+            <p style="color:#a89f92;">&copy; 2026 Momina Sheikh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== MOBILE MENU =====
+            function toggleMenu() {
+                var nav = document.getElementById('navLinks');
+                if (nav) nav.classList.toggle('open');
+            }
+            window.toggleMenu = toggleMenu;
+
+            var themeBtn = document.getElementById('themeToggle');
+            if (themeBtn) {
+                themeBtn.addEventListener('click', function() {
+                    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+                    var next = current === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    try { localStorage.setItem('ms-theme', next); } catch (err) {}
+                });
+            }
+
+            // ===== SCROLL REVEAL ANIMATIONS =====
+            var revealTargets = document.querySelectorAll(
+                '.image-card, .category-heading, .page-header'
+            );
+            if ('IntersectionObserver' in window && revealTargets.length) {
+                revealTargets.forEach(function(el) { el.classList.add('reveal'); });
+                var revealObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('in-view');
+                            revealObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+                revealTargets.forEach(function(el) { revealObserver.observe(el); });
+            }
+
+            var filterBar = document.getElementById('portfolioFilters');
+            if (filterBar) {
+                var filterBtns = filterBar.querySelectorAll('.filter-btn');
+                var categoryBlocks = document.querySelectorAll('.portfolio-category');
+                filterBar.addEventListener('click', function(e) {
+                    var btn = e.target.closest('.filter-btn');
+                    if (!btn) return;
+                    filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    var filter = btn.getAttribute('data-filter');
+                    categoryBlocks.forEach(function(block) {
+                        if (filter === 'all' || block.getAttribute('data-category') === filter) {
+                            block.classList.remove('hidden');
+                        } else {
+                            block.classList.add('hidden');
+                        }
+                    });
+                });
+
+                var scrollWrap = document.getElementById('filtersScrollWrap');
+                if (scrollWrap) {
+                    var checkScrollEnd = function() {
+                        var atEnd = filterBar.scrollWidth - filterBar.clientWidth - filterBar.scrollLeft < 10;
+                        scrollWrap.classList.toggle('scrolled-end', atEnd);
+                    };
+                    filterBar.addEventListener('scroll', checkScrollEnd, { passive: true });
+                    window.addEventListener('resize', checkScrollEnd);
+                    checkScrollEnd();
+                }
+            }
+
+            document.querySelectorAll('.nav-links a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    var nav = document.getElementById('navLinks');
+                    if (nav) nav.classList.remove('open');
+                });
+            });
+
+            // ===== HEADER SCROLL EFFECT =====
+            window.addEventListener('scroll', function() {
+                var header = document.getElementById('header');
+                if (header) {
+                    if (window.scrollY > 50) header.classList.add('scrolled');
+                    else header.classList.remove('scrolled');
+                }
+            });
+
+            // ===== LIGHTBOX =====
+            window.openLightbox = function(img) {
+                var lb = document.getElementById('lightbox');
+                var lbImg = document.getElementById('lightboxImg');
+                if (img && lb && lbImg) {
+                    lbImg.src = img.src;
+                    lbImg.alt = img.alt;
+                    lb.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+
+            window.closeLightbox = function() {
+                var lb = document.getElementById('lightbox');
+                if (lb) {
+                    lb.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLightbox();
+            });
+
+            // ===== SMOOTH SCROLL =====
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
